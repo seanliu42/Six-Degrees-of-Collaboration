@@ -1,0 +1,292 @@
+/**********************************************************
+* CS15 Six Degrees
+*
+* Project 2
+*
+* README
+* by Sean Liu, December 2021
+*
+*********************************************************/                                
+                                    
+Time spent: 
+
+20 hours
+
+Program Purpose:
+
+This homework assignment teaches us how to implement traversals of a graph.
+
+Acknowledgements:
+
+Thanks to Zack Rummler and Ibrahima Barry for helping me debug my getArtists
+function.
+
+Files:
+
+README: This file. It provides insights to what this assignment is, who
+        helped me with it, and how I tested my final product.
+
+Makefile: This file contains all the compilation and linking commands that
+          allows my program to be run and tested seamlessly. Without this 
+          file I would need to compile each interface and implementation file
+          individually. Instead, I can run "unit_test" and everything will 
+          be compiled and linked together. This improves efficiency. 
+          Especially because the command will only compile files that have 
+          been newly modified, instead of compiling everything redundantly.
+
+CollabGraph.cpp: The implementation of the CollabGraph class. Defines all the
+                 functions that modify the CollabGraph. These definitions 
+                 support the SixDegrees functions.
+
+CollabGraph.h: The interface of the CollabGraph class. Declares all of the
+               functions that modify the CollabGraph.
+
+main.cpp: Driver file for SixDegrees. It passes command line arguments
+          into the SixDegrees' driver function. Exits the whole program 
+          appropriately after SixDegrees terminates, which prevents 
+          memory issues.
+
+SixDegrees.cpp: The implementation of the SixDegrees class. Defines all the
+                 functions the SixDegrees program has.
+
+SixDegrees.h: The interface of the SixDegrees class. Declares all of the
+               functions that the SixDegrees program has.
+            
+unit_tests.h: Tester file for the CollabGraph class.
+               
+emptyGraphData.txt: Empty data file I used to compare my program to
+                    the demo.
+
+disconnectedGraphData.txt: Data file I used to compare my program to
+                           the demo, which creates a disconnected graph.
+
+disconnectedGraphCommands.txt: Command file I used to compare my program to 
+                               the demo, using artists in my 
+                               disconnectedGraphData.txt file.
+
+sameArtistCommands.txt: Command file I used to compare my program to the demo,
+                        using the original artists.txt file. Calls every 
+                        function on the same artist.
+                
+invalidArtistsCommands.txt: Command file I used to compare my program to the 
+                            demo, using the original artists.txt file. Calls 
+                            every function with invalid artists.
+
+the_OGsameArtist.txt \
+my_OGsameArtist.txt: Diff test output files. Uses the original artists.txt file
+                     and the sameArtistCommands.txt file.
+
+the_OGinvalidArtists.txt \
+my_OGinvalidArtists.txt: Diff test output files. Uses the original artists.txt 
+                         file and the invalidArtistsCommands.txt file.
+
+the_DCcommands.txt \
+my_DCcommands.txt: Diff test output files. Uses the disconnectedGraphData.txt 
+                   file and the disconnectedGraphCommands.txt file.
+
+the_MTinvalidArtists.txt \
+my_MTinvalidArtists.txt: Diff test output files. Uses the emptyGraphData.txt 
+                         file and the invalidArtistsCommands.txt file.
+
+
+How to compile and run the program:
+
+Enter "make" into your console, and the Makefile will do its magic. It will
+create an executable called SixDegrees. Run it with no command line arguments
+for instructions on how to run it properly!
+
+Data Structures and Algorithms:
+
+In this assignment, we used graphs, queues, and stacks. 
+
+A graph is a set of of vertices and edges between them, i.e. nodes and arcs.
+In the context of this project, the vertices are artists and song
+collaborations are edges that connect the artists. Graphs have no imposed
+structure, can cycle, and vertices that can either point to themselves or
+not connect to any others. Because of these unique features, they are great
+for representing relationships. Aside from artists and song collaborations,
+graphs can be used for maps, or social media networks. For example, cities are
+vertices and edges are the distances between them, or users are vertices and
+friendships are the edges between them. Graphs can also be directed or
+undirected, meaning their edges can have directions associated with them.
+The previous examples I gave are all examples of undirected graphs, because
+the relationships go both ways. An example of the usage of a directed graph
+are websites and links. The links are the edges between website vertices.
+Every webpage has a unique link, so there would be no edges that point in
+both directions/that are directionless. However, outside of mapping
+relationships, graphs may not be so advantageous. For organizing and
+accessing data, particularly integer data, it's much more efficient to use an
+array, or a binary search tree.
+
+A queue is a line, just like in real life. Referred to as FIFO—first in,
+first out—as data is entered into a queue, they assume positions based on
+when they are entered. The line cannot be skipped and cut. Extremely simple,
+but that's why they are advantageous. Having more functions than needed may
+do more harm than good. If we were to use a linked list only to access the
+front element and add to the back, we run the risk of accidentally accessing
+or adding elements to the middle of the list. To eliminate this possibility,
+we want the abstraction barrier, i.e. limitations, a queue offers. Two great
+applications of queues are printer queues on a network and customer service
+queues. Both complete their tasks in chronological order, and if a new task
+is added it is handled after the pre-existing tasks are finished. However,
+for situations that require more versatility in where and when we access data,
+this abstraction barrier rules out the usage of queues. A linked list or array
+would be much better.
+
+Stacks are also very simple and self-explanatory. Unlike queues, stacks are
+referred to as LIFO—last in, first out—data is entered on top of the stack,
+and positions are assumed opposite of the order they were entered. Like a
+stack of plates in real life, you place them on top of the existing stack. To
+retrieve a plate, you take from the top. You wouldn't take a plate from the
+middle or the bottom of the stack. Again, we have an abstraction barrier. We
+eliminate potential insertion/removal mistakes. This makes stacks great for
+modeling task interruption and resumption, where you would always resume with
+the most recently interrupted task. An example of a stack implementation is in
+our project where we made a calculator. In multi-step calculations, a
+calculator needs to first process newly added information/operation before
+adding it to the pre-existing progress. For example, adding 1, 2, and 3 on a
+simple non-scientific calculator. First you type 1, then press the addition
+button. Then you type 2, and press the addition button again.
+The number on the screen becomes 3, you type 3, hit the equals button,
+and the screen outputs the final value. In context of the stack, 1 is added to
+the stack. When the addition button is hit, we know to take the next value and
+process the operation. So it takes the next value (2), then takes all values
+off the stack, then pushes the processed operation (1 + 2) on the top of
+the stack. Because it is the only member/top of the stack, it is executed and
+leaves the result (3) on the stack. Then the same happens when the next
+addition and value (3) is entered and the equals button is hit. While this
+implementation was great, stacks are not useful in other situations that
+require more versatility in where and when we access data. A linked list or
+array would be much better for data storage with versatile insertion and
+access.
+
+During this assignment, I also practiced implementing breadth-first and
+depth-first traversal algorithms.
+
+Breadth-first traversal starts traversal at a source node, visits all
+neighboring nodes, then moves onto the nearest node and continues this pattern.
+To do this, we use a queue. First, the source node is marked as visited and
+enqueued. Whenever the queue is populated, there is a node under inspection.
+During the inspection, we check if it's the destination node. If it is, we've
+finished the traversal. If not, we move onto its neighbors. If its neighbors
+are already visited, we don't do anything with them. If there is a neighbor 
+that hasn't been visited, mark it as seen, update its predecessor, then push
+it onto the queue for inspection. Then we pop off the queue and start
+inspection on the rest of the queue.
+
+Depth-first traversal sticks to a single path, visiting all nodes as far along
+the path as possible, then backtracks and finds another path to continue this
+pattern. This can be done recursively, but I learned to do this with a stack.
+The operation of marking and updating info is similar to breadth-first 
+traversal, and thanks to LIFO nature of stacks all we need to do is switch the
+queue in the breadth-first implementation with a stack. So instead of visiting
+all unvisited neighbors of a node, we just go to the last unvisited node then
+backtrack.
+
+1) What is the difference between BFS and DFS? What are their pros/cons?
+
+The difference between BFS and DFS is the order of their traversal. BFS 
+traverses level by level, visiting nodes by proximity. DFS traverses by depth,
+visiting nodes furthest from the current node. These differences also show
+in the data structures that are used in their implementations. BFS uses queues,
+where the closer a node is the sooner it'll be visited (FIFO based on 
+proximity). DFS uses stacks, so it visits the furthest node first (LIFO).
+The pro for BFS is that it finds the shortest path, but its con is that it 
+takes more memory since it traverses so iteratively. DFS is much more space 
+efficient, but isn't able to find efficient paths like BFS. 
+
+2) How did you choose to tackle the incl (if implemented) and
+not commands? How do they compare to the BFS and DFS
+algorithms?
+
+I didn't implement the incl function. For not, I made a loop which marked
+the artist names given in the input stream as seen then called BFS after the
+input stream was done ("*"). Marking the artists as seen before calling BFS
+avoids hitting them in traversal, since has a conditional to only visit
+neighbors that haven't been visited before. So my not function was essentially
+the BFS algorithm with an extra step. To compare with DFS, it's just the usage
+of a queue instead of a stack since we're using BFS.
+
+3) State what you think your runtime is for each of the commands
+(excluding quit) commands and why.
+
+The print function is O(V^2) because the CollabGraph print_graph function
+has a nested for loop. The first loop traverses through every node O(V). For
+every node, they get all the neighbors names then print the collabs O(V^2).
+
+Not, BFS, and DFS are O(V+E). Not is no different from BFS, because the marking
+of excluded artists is constant. BFS and DFS are O(V+E) because we visit each
+node once, and for each node we visit their edges.
+
+
+Testing:
+
+To test my CollabGraph populate_graph implementation, I manually created a
+vector of artists (with songs added to them), called populate_graph with
+the vector, then used the given print graph function. No issues.
+
+To test my CollabGraph report_path implementation, I used the insert_vertex 
+function to manually populate a graph, then used set_predecessor to manually
+create a path. Then I called report_path on two of those artists, and made
+a loop printing the contents of the vector generated by report_path. In phase
+1, this function failed two tests: self-collaboration and no path. This made me
+realize that my implementation would create a stack with at least one element
+regardless of the validity of a path. So I created an empty stack, and
+created a conditional at the beginning of the function. It checked if
+we were attempting to find a path from and to the same vertex. If true, then
+return the empty stack. This is because valid paths need at least two elements.
+My original implementation would return the path stack (before pushing any 
+neighbors) if predecessor was blank. However, I realized that the stack
+isn't empty because we still pushed source on before the while loop. I updated
+this to return the new empty stack. Fingers crossed this fixes the issue in
+phase 2!
+
+To test my CollabGraph get_vertex_neighbors implementation, I populated the
+graph just as I did in my populate_graph test, then made a loop to print
+the contents of the vector generated by get_vertex_neighbors. No issues.
+
+I ran into a bunch of issues while implementing Six Degrees, but they were
+all trial and error solutions so I did not have the awareness to log these
+fixes. However, these were minor compared to the issues I faced once the
+program was runnable.
+
+After I finished fully implementing Six Degrees, I manually called all
+functions on the original artists.txt data file and visually inspected the
+results. Seemed fine. However, I really ran into trouble when I created command
+files and my own data files. The first problem I had was using an output file.
+My program would not print to console, but it wouldn't create an output file
+that I could download. After spending some time reading over my functions
+relating to command line arguments, I realized I forgot to open my output
+stream. Adding that line of code fixed the issue. Then I randomly had the
+issue of my output going to console, despited fixing the output stream. After
+looking over all of my code, I noticed that I was using cerr instead of
+output << for the "not found in the dataset" error messages. I also
+re-read the spec to find that cerr should only be used for command line
+handling. Changing cerr to output << wasn't hard, but I had to add ostream
+&output for a ton of my functions. Probably not the most elegant solution,
+but I had to do it so I could continue debugging time-efficiently. 
+
+Now that I could diff check my output files to the reference implementation,
+I noticed that my OGsameArtistsCommands.txt output looked right but was not
+passing the diff test. I counted the lines, and the reference was printing
+more errors. I added a bunch of "here"s in my command file so I could see which
+function call wasn't matching and found that it was my not function. Luckily,
+my "here"s were accidentally being processed in the not functions, which showed
+me that the order in which error messages were printing didn't match. I went
+to my notWrapper function, and changed the order of function calls so that
+the bfs errors printed before the not errors printed.
+
+Lastly, I was getting a runtime error when trying to run any command file
+with an empty data file. The runtime error would happen automatically, without
+typing any commands. Even when opening the program with an empty data file and
+not typing, the program would crash 2-3 seconds after starting it. I put 
+"here"s in my importData function, and found that the issue was where I 
+called getArtists. Because my program would crash automatically before any
+function calls, I figured it might be an issue with the while loop. Looking at
+it, I realized that a while loop of "not input.eof()" might be weird with an
+empty file, since there technically is no start. I changed it so the loop would
+continually getline and made the first thing in the loop a conditional 
+to return if input.eof(), because I figured it would stop the loop from
+running indefinitely until crashing. This worked!
+
+
