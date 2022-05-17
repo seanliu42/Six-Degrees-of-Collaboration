@@ -52,43 +52,6 @@ SixDegrees.cpp: The implementation of the SixDegrees class. Defines all the
 SixDegrees.h: The interface of the SixDegrees class. Declares all of the
                functions that the SixDegrees program has.
             
-unit_tests.h: Tester file for the CollabGraph class.
-               
-emptyGraphData.txt: Empty data file I used to compare my program to
-                    the demo.
-
-disconnectedGraphData.txt: Data file I used to compare my program to
-                           the demo, which creates a disconnected graph.
-
-disconnectedGraphCommands.txt: Command file I used to compare my program to 
-                               the demo, using artists in my 
-                               disconnectedGraphData.txt file.
-
-sameArtistCommands.txt: Command file I used to compare my program to the demo,
-                        using the original artists.txt file. Calls every 
-                        function on the same artist.
-                
-invalidArtistsCommands.txt: Command file I used to compare my program to the 
-                            demo, using the original artists.txt file. Calls 
-                            every function with invalid artists.
-
-the_OGsameArtist.txt \
-my_OGsameArtist.txt: Diff test output files. Uses the original artists.txt file
-                     and the sameArtistCommands.txt file.
-
-the_OGinvalidArtists.txt \
-my_OGinvalidArtists.txt: Diff test output files. Uses the original artists.txt 
-                         file and the invalidArtistsCommands.txt file.
-
-the_DCcommands.txt \
-my_DCcommands.txt: Diff test output files. Uses the disconnectedGraphData.txt 
-                   file and the disconnectedGraphCommands.txt file.
-
-the_MTinvalidArtists.txt \
-my_MTinvalidArtists.txt: Diff test output files. Uses the emptyGraphData.txt 
-                         file and the invalidArtistsCommands.txt file.
-
-
 How to compile and run the program:
 
 Enter "make" into your console, and the Makefile will do its magic. It will
